@@ -1,0 +1,10 @@
+---
+- name: Install Docker Desktop
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Docker Desktop
+      win_chocolatey:
+        name: docker-desktop
+        state: present

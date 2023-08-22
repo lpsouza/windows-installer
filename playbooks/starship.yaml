@@ -1,0 +1,10 @@
+---
+- name: Install Starship
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Starship
+      win_chocolatey:
+        name: starship
+        state: present

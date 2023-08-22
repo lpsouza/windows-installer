@@ -1,0 +1,10 @@
+---
+- name: Install Visual Studio Code
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Visual Studio Code
+      win_chocolatey:
+        name: vscode
+        state: present

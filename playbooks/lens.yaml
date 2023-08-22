@@ -1,0 +1,10 @@
+---
+- name: Install Lens
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Lens
+      win_chocolatey:
+        name: lens
+        state: present
