@@ -1,6 +1,6 @@
 # windows-installer
 
-Welcome to the Windows Installer repository! This repository hosts Ansible playbooks designed to streamline the installation and configuration of software on Windows systems.
+Welcome to the Windows Installer repository! This repository hosts Ansible playbooks designed to streamline the installation and configuration of software on Windows systems using Ansible on WSL2.
 
 ## Configure WinRM to allow Ansible to connect to Windows
 
