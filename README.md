@@ -16,7 +16,7 @@ $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
 powershell.exe -ExecutionPolicy ByPass -File $file
 ```
 
-In case you encounter the error message Unable to check the status of the firewall after running the commands above, execute the following command to address the issue:
+In case you encounter the error message `Unable to check the status of the firewall` after running the commands above, execute the following command to address the issue:
 
 ```powershell
 netsh advfirewall firewall add rule name="Windows Remote Management (HTTP-In)" dir=in action=allow service=any enable=yes profile=any localport=5985 protocol=tcp
