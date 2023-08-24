@@ -1,0 +1,10 @@
+---
+- name: Install hyper-v feature
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Hyper-V feature
+      win_optional_feature:
+        name: Microsoft-Hyper-V-All
+        state: present
