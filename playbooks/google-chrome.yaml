@@ -1,0 +1,10 @@
+---
+- name: Install Google Chrome
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Google Chrome
+      win_chocolatey:
+        name: googlechrome
+        state: present
