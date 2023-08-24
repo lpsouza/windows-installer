@@ -8,3 +8,14 @@
       win_chocolatey:
         name: starship
         state: present
+
+    - name: Ensure config directory exists
+      win_file:
+        path: C:\Users\{{ ansible_user }}\.config
+        state: directory
+
+    - name: Copy Starship config from WSL
+      win_copy:
+        src: ~/.config/starship.toml
+        dest: C:\Users\{{ ansible_user }}\.config\starship.toml
+        force: true
