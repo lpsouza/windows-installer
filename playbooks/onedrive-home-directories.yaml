@@ -1,0 +1,40 @@
+---
+- name: Create links from OneDrive to local directories
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: mklink Download directory
+      win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\Downloads D:\Users\{{ ansible_user }}\OneDrive\Downloads
+      args:
+        creates: C:\Users\{{ ansible_user }}\Downloads
+
+    - name: mklink Documents directory
+      win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\Documents D:\Users\{{ ansible_user }}\OneDrive\Documents
+      args:
+        creates: C:\Users\{{ ansible_user }}\Documents
+
+    - name: mklink Pictures directory
+      win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\Pictures D:\Users\{{ ansible_user }}\OneDrive\Pictures
+      args:
+        creates: C:\Users\{{ ansible_user }}\Pictures
+
+    - name: mklink Music directory
+      win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\Music D:\Users\{{ ansible_user }}\OneDrive\Music
+      args:
+        creates: C:\Users\{{ ansible_user }}\Music
+
+    - name: mklink Videos directory
+      win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\Videos D:\Users\{{ ansible_user }}\OneDrive\Videos
+      args:
+        creates: C:\Users\{{ ansible_user }}\Videos
+
+    - name: mklink Desktop directory
+      win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\Desktop D:\Users\{{ ansible_user }}\OneDrive\Desktop
+      args:
+        creates: C:\Users\{{ ansible_user }}\Desktop
+
+    - name: mklink Temp directory
+      win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\Temp D:\Users\{{ ansible_user }}\OneDrive\Temp
+      args:
+        creates: C:\Users\{{ ansible_user }}\Temp
