@@ -1,0 +1,10 @@
+---
+- name: Install OpenVPN
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install OpenVPN
+      win_chocolatey:
+        name: openvpn
+        state: present
