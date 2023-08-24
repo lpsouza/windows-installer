@@ -1,0 +1,10 @@
+---
+- name: Install Whatsapp
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Whatsapp
+      win_chocolatey:
+        name: whatsapp
+        state: present
