@@ -1,0 +1,10 @@
+---
+- name: Install gsudo
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install gsudo
+      win_chocolatey:
+        name: gsudo
+        state: present
