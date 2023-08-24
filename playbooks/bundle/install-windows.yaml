@@ -1,0 +1,10 @@
+---
+- import_playbook: playbooks/docker-desktop.yaml
+- import_playbook: playbooks/google-chrome.yaml
+- import_playbook: playbooks/gsudo.yaml
+- import_playbook: playbooks/hyper-v.yaml
+- import_playbook: playbooks/lens.yaml
+- import_playbook: playbooks/onedrive-home-directories.yaml
+- import_playbook: playbooks/openvpn.yaml
+- import_playbook: playbooks/starship.yaml
+- import_playbook: playbooks/vscode.yaml
