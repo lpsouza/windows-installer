@@ -1,0 +1,10 @@
+---
+- name: Install GIMP
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install GIMP
+      win_chocolatey:
+        name: gimp
+        state: present

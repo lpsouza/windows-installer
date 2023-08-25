@@ -1,10 +1,19 @@
 ---
+- import_playbook: ../7zip.yaml
 - import_playbook: ../docker-desktop.yaml
+- import_playbook: ../gimp.yaml
+- import_playbook: ../git.yaml
 - import_playbook: ../google-chrome.yaml
 - import_playbook: ../gsudo.yaml
 - import_playbook: ../hyper-v.yaml
 - import_playbook: ../lens.yaml
 - import_playbook: ../onedrive-home-directories.yaml
 - import_playbook: ../openvpn.yaml
+- import_playbook: ../powertoys.yaml
+- import_playbook: ../putty.yaml
+- import_playbook: ../remote-desktop-client.yaml
+- import_playbook: ../set-home-with-wsl.yaml
 - import_playbook: ../starship.yaml
+- import_playbook: ../uui.yaml
 - import_playbook: ../vscode.yaml
+- import_playbook: ../windows-sandbox.yaml

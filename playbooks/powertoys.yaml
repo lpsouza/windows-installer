@@ -1,0 +1,10 @@
+---
+- name: Install Powertoys
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Powertoys
+      win_chocolatey:
+        name: powertoys
+        state: present

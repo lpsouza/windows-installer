@@ -1,0 +1,10 @@
+---
+- name: Install Remote Desktop Client
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Remote Desktop Client
+      win_chocolatey:
+        name: remote-desktop-client
+        state: present

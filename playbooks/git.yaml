@@ -1,0 +1,44 @@
+---
+- name: Install GIT
+  hosts: windows
+  gather_facts: false
+
+  vars:
+    git_username: "{{ lookup('env', 'GIT_USERNAME') }}"
+    git_email: "{{ lookup('env', 'GIT_EMAIL') }}"
+
+  tasks:
+    - name: Install GIT
+      win_chocolatey:
+        name: git
+        state: present
+
+    - name: Check Git username configuration
+      win_shell: git config --global user.name
+      register: git_username_output
+      changed_when: false
+      failed_when: false
+
+    - name: Set Git username
+      win_shell: git config --global user.name "{{ git_username }}"
+      when: git_username_output.rc != 0
+
+    - name: Check Git email configuration
+      win_shell: git config --global user.email
+      register: git_email_output
+      changed_when: false
+      failed_when: false
+
+    - name: Set Git email
+      win_shell: git config --global user.email "{{ git_email }}"
+      when: git_email_output.rc != 0
+
+    - name: Check Git pull.rebase configuration set to false (merge)
+      win_shell: git config --global pull.rebase
+      register: git_pull_rebase_output
+      changed_when: false
+      failed_when: false
+
+    - name: Set Git pull.rebase to false (merge)
+      win_shell: git config --global pull.rebase false
+      when: git_pull_rebase_output.rc != 0

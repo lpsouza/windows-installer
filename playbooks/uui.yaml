@@ -1,0 +1,10 @@
+---
+- name: Install UUI
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install UUI
+      win_chocolatey:
+        name: universal-usb-installer
+        state: present

@@ -1,0 +1,10 @@
+---
+- name: Install Windows Sandbox feature
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Windows Sandbox feature
+      win_optional_feature:
+        name: Containers-DisposableClientVM
+        state: present

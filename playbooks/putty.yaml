@@ -1,0 +1,10 @@
+---
+- name: Install PuTTY
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install PuTTY
+      win_chocolatey:
+        name: putty
+        state: present

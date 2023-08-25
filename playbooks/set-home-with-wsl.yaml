@@ -1,0 +1,17 @@
+---
+- name: Set home directory with WSL home configuration
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Copy .ssh directory
+      win_copy:
+        src: "~/.ssh"
+        dest: "C:/Users/{{ ansible_user }}"
+        force: true
+
+    - name: Copy .kube directory
+      win_copy:
+        src: "~/.kube"
+        dest: "C:/Users/{{ ansible_user }}"
+        force: true
