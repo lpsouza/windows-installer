@@ -1,5 +1,5 @@
 ---
-- name: Install hyper-v feature
+- name: Install Hyper-V and HostGuardian Service
   hosts: windows
   gather_facts: false
 
@@ -7,4 +7,9 @@
     - name: Install Hyper-V feature
       win_optional_feature:
         name: Microsoft-Hyper-V-All
+        state: present
+
+    - name: Install Host Guardian feature
+      win_optional_feature:
+        name: HostGuardian
         state: present

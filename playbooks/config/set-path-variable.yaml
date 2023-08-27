@@ -1,0 +1,11 @@
+---
+- name: Set utils PATHs
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Set utils PATHs
+      win_path:
+        elements:
+          - D:\Users\{{ ansible_user }}\OneDrive\Documents\PowerShell\Scripts\
+          - D:\Users\{{ ansible_user }}\OneDrive\Documents\Portable\kubecm\
