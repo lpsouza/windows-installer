@@ -8,3 +8,14 @@
       win_chocolatey:
         name: docker-desktop
         state: present
+
+    - name: Configure .wslconfig
+      win_file:
+        path: C:\Users\{{ ansible_user }}\.wslconfig
+        state: touch
+        mode: 0644
+        content: |
+          [wsl2]
+          memory=8GB
+          processors=4
+          swap=0
