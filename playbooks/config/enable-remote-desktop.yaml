@@ -1,0 +1,25 @@
+---
+- name: Enable Remote Desktop
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Enable Remote Desktop
+      win_shell: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+      register: rdp
+
+    - name: Enable Remote Desktop Firewall Rule
+      win_firewall_rule:
+        name: "[Ansible] Allow Remote Desktop for all profiles (TCP-In)"
+        enabled: true
+        direction: in
+        action: allow
+        protocol: tcp
+        localport: 3389
+
+  handlers:
+    - name: Restart Remote Desktop Service
+      win_service:
+        name: TermService
+        state: restarted
+      when: rdp is changed

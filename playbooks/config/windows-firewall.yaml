@@ -1,0 +1,56 @@
+---
+- name: Clear all firewall rules and recreate the winrm rules for Ansible
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Disable firewall
+      win_firewall:
+        state: disabled
+
+    - name: Clear all firewall rules
+      win_shell: |
+        Get-NetFirewallRule | Remove-NetFirewallRule
+      failed_when: false
+
+    - name: Create firewall rule for winrm (HTTP)
+      win_firewall_rule:
+        name: '[Ansible] Allow WinRM HTTP (TCP-In)'
+        localport: 5985
+        protocol: tcp
+        state: present
+        enabled: true
+        direction: in
+        action: allow
+
+    - name: Create firewall rule for winrm (HTTPS)
+      win_firewall_rule:
+        name: '[Ansible] Allow WinRM HTTPS (TCP-In)'
+        localport: 5986
+        protocol: tcp
+        state: present
+        enabled: true
+        direction: in
+        action: allow
+
+    - name: Add firewall rule for SSH
+      win_firewall_rule:
+        name: "[Ansible] Allow OpenSSH Server for all profiles (TCP-In)"
+        localport: 22
+        protocol: tcp
+        enabled: true
+        direction: in
+        action: allow
+
+    - name: Disable firewall block notifications
+      win_shell: |
+        Set-NetFirewallProfile -Profile Domain,Public,Private -NotifyOnListen False
+      failed_when: false
+
+    - name: Enable firewall
+      win_firewall:
+        state: enabled
+
+    - name: Forward port SSH to WSL2
+      win_command: |
+        netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=22 connectaddress={{ wsl2_ip }} connectport=22
