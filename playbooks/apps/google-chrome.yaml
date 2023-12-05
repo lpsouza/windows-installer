@@ -7,4 +7,5 @@
     - name: Install Google Chrome
       win_chocolatey:
         name: googlechrome
+        version: 119.0.6045.160
         state: present
