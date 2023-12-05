@@ -20,6 +20,7 @@ In case you encounter the error message `Unable to check the status of the firew
 
 ```powershell
 netsh advfirewall firewall add rule name="Windows Remote Management (HTTP-In)" dir=in action=allow service=any enable=yes profile=any localport=5985 protocol=tcp
+netsh advfirewall firewall add rule name="Windows Remote Management (HTTPS-In)" dir=in action=allow service=any enable=yes profile=any localport=5986 protocol=tcp
 ```
 
 These steps should help establish a secure and seamless connection between Ansible and Windows systems.
