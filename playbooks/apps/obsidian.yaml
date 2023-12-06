@@ -1,0 +1,10 @@
+---
+- name: Install Obsidian
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Obsidian
+      win_chocolatey:
+        name: obsidian
+        state: present
