@@ -1,0 +1,10 @@
+---
+- name: Install Insync
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Insync
+      win_chocolatey:
+        name: insync
+        state: present
