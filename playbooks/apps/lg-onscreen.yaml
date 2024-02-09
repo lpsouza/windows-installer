@@ -1,0 +1,10 @@
+---
+- name: Install LG OnScreen Control
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install LG OnScreen Control
+      win_chocolatey:
+        name: onscreen-control
+        state: present
