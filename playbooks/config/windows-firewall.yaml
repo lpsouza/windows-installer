@@ -35,9 +35,17 @@
 
     - name: Add firewall rule for SSH
       win_firewall_rule:
-        name: "[Ansible] Allow OpenSSH Server for all profiles (TCP-In)"
+        name: "[Ansible] Allow OpenSSH Server (TCP-In)"
         localport: 22
         protocol: tcp
+        enabled: true
+        direction: in
+        action: allow
+
+    - name: Add firewall rule to Wireless Display
+      win_firewall_rule:
+        name: "[Ansible] Allow Wireless Display (TCP-In)"
+        program: "%systemroot%\\system32\\WUDFHost.exe"
         enabled: true
         direction: in
         action: allow
