@@ -1,0 +1,10 @@
+---
+- name: Install AWS CLI
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install AWS CLI
+      win_chocolatey:
+        name: awscli
+        state: present
