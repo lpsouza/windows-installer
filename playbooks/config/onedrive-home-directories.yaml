@@ -38,3 +38,8 @@
       win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\Temp D:\Users\{{ ansible_user }}\OneDrive\Temp
       args:
         creates: C:\Users\{{ ansible_user }}\Temp
+
+    - name: mklink OneDrive directory
+      win_command: cmd.exe /c mklink /D C:\Users\{{ ansible_user }}\OneDrive D:\Users\{{ ansible_user }}\OneDrive
+      args:
+        creates: C:\Users\{{ ansible_user }}\OneDrive
