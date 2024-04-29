@@ -1,0 +1,10 @@
+---
+- name: Install Logi Options+
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Logi Options+
+      win_chocolatey:
+        name: logitech-options-plus
+        state: present
