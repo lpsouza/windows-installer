@@ -22,6 +22,8 @@
         enabled: true
         direction: in
         action: allow
+        profiles:
+          - private
 
     - name: Create firewall rule for winrm (HTTPS)
       win_firewall_rule:
@@ -32,6 +34,8 @@
         enabled: true
         direction: in
         action: allow
+        profiles:
+          - private
 
     - name: Add firewall rule for SSH
       win_firewall_rule:
@@ -41,6 +45,8 @@
         enabled: true
         direction: in
         action: allow
+        profiles:
+          - private
 
     - name: Add firewall rule to Wireless Display
       win_firewall_rule:
@@ -49,6 +55,8 @@
         enabled: true
         direction: in
         action: allow
+        profiles:
+          - private
 
     - name: Disable firewall block notifications
       win_shell: |
