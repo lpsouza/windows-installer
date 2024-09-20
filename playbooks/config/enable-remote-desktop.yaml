@@ -16,6 +16,8 @@
         action: allow
         protocol: tcp
         localport: 3389
+        profiles:
+          - private
 
   handlers:
     - name: Restart Remote Desktop Service
