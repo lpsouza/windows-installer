@@ -37,6 +37,17 @@
         profiles:
           - private
 
+    - name: Add firewall rule for mDNS
+      win_firewall_rule:
+        name: "[Ansible] Allow mDNS (UDP-In)"
+        localport: 5353
+        protocol: udp
+        enabled: true
+        direction: in
+        action: allow
+        profiles:
+          - private
+
     - name: Add firewall rule for SSH
       win_firewall_rule:
         name: "[Ansible] Allow OpenSSH Server (TCP-In)"
