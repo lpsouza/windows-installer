@@ -1,0 +1,10 @@
+---
+- name: Install Fing
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install Fing
+      win_chocolatey:
+        name: fing
+        state: present
