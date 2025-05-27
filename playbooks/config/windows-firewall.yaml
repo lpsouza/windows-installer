@@ -17,27 +17,25 @@
       win_firewall_rule:
         name: '[Ansible] Allow WinRM HTTP (TCP-In)'
         localport: 5985
+        remoteip: "{{ wsl2_ip | default('0.0.0.0/0') }}"
         protocol: tcp
         state: present
         enabled: true
         direction: in
         action: allow
-        profiles:
-          - private
 
     - name: Create firewall rule for winrm (HTTPS)
       win_firewall_rule:
         name: '[Ansible] Allow WinRM HTTPS (TCP-In)'
         localport: 5986
+        remoteip: "{{ wsl2_ip | default('0.0.0.0/0') }}"
         protocol: tcp
         state: present
         enabled: true
         direction: in
         action: allow
-        profiles:
-          - private
 
-    - name: Add firewall rule for mDNS
+    - name: Create firewall rule for mDNS (UDP)
       win_firewall_rule:
         name: "[Ansible] Allow mDNS (UDP-In)"
         localport: 5353
@@ -48,18 +46,7 @@
         profiles:
           - private
 
-    - name: Add firewall rule for SSH
-      win_firewall_rule:
-        name: "[Ansible] Allow OpenSSH Server (TCP-In)"
-        localport: 22
-        protocol: tcp
-        enabled: true
-        direction: in
-        action: allow
-        profiles:
-          - private
-
-    - name: Add firewall rule to Wireless Display
+    - name: Create firewall rule Wireless Display (TCP-In)
       win_firewall_rule:
         name: "[Ansible] Allow Wireless Display (TCP-In)"
         program: "%systemroot%\\system32\\WUDFHost.exe"
@@ -77,7 +64,3 @@
     - name: Enable firewall
       win_firewall:
         state: enabled
-
-    - name: Forward port SSH to WSL2
-      win_command: |
-        netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=22 connectaddress={{ wsl2_ip }} connectport=22
