@@ -1,33 +1,37 @@
 # windows-installer
 
-Welcome to the Windows Installer repository! This repository hosts Ansible playbooks designed to streamline the installation and configuration of software on Windows systems using Ansible on WSL2.
+This repository contains PowerShell scripts used to configure a Windows machine after installation.
 
-## Configure WinRM to allow Ansible to connect to Windows
+## Structure
 
-To establish a connection between Ansible and Windows, you'll need to set up the WinRM (Windows Remote Management) service. Follow these steps in an elevated PowerShell session:
+- `scripts/enable-remote-desktop.ps1`: Enables Remote Desktop and ensures the RDP inbound firewall rule is present.
+- `scripts/windows-firewall.ps1`: Resets firewall rules and recreates the inbound rules used by this setup.
+- `scripts/apply-winget-configuration.ps1`: Validates/install `Microsoft.WinGet.DSC` and applies winget configuration.
+- `.config/configuration.winget`: WinGet Configuration file with package definitions.
 
-```powershell
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$url = "https://raw.githubusercontent.com/ansible/ansible-documentation/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
-$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+## Run scripts
 
-(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
-
-powershell.exe -ExecutionPolicy ByPass -File $file
-```
-
-In case you encounter the error message `Unable to check the status of the firewall` after running the commands above, execute the following command to address the issue:
+Run scripts from an elevated PowerShell session:
 
 ```powershell
-netsh advfirewall firewall add rule name="Windows Remote Management (HTTP-In)" dir=in action=allow service=any enable=yes profile=any localport=5985 protocol=tcp
-netsh advfirewall firewall add rule name="Windows Remote Management (HTTPS-In)" dir=in action=allow service=any enable=yes profile=any localport=5986 protocol=tcp
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+.\scripts\enable-remote-desktop.ps1
+.\scripts\windows-firewall.ps1
+.\scripts\apply-winget-configuration.ps1
 ```
 
-These steps should help establish a secure and seamless connection between Ansible and Windows systems.
+## Manage packages with WinGet Configuration
 
-## Generate inventory file (WSL2)
+Run everything (checks/install DSC module when needed, then runs `winget configure`):
 
-```bash
-chmod +x ./generate-wsl2-inventory.sh
-./generate-wsl2-inventory.sh
+```powershell
+.\scripts\apply-winget-configuration.ps1
+```
+
+To add or remove packages, edit `.config/configuration.winget`.
+
+Optional: install the DSC module for all users.
+
+```powershell
+.\scripts\apply-winget-configuration.ps1 -InstallModuleForAllUsers
 ```
