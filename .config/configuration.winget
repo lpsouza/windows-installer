@@ -41,3 +41,155 @@ properties:
       settings:
         id: Google.AntigravityCLI
         source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Google Drive
+        securityContext: elevated
+      settings:
+        id: Google.GoogleDrive
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install gsudo
+        securityContext: elevated
+      settings:
+        id: gerardog.gsudo
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Starship
+        securityContext: elevated
+      settings:
+        id: Starship.Starship
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install PowerToys
+        securityContext: elevated
+      settings:
+        id: Microsoft.PowerToys
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Tailscale
+        securityContext: elevated
+      settings:
+        id: Tailscale.Tailscale
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Obsidian
+        securityContext: elevated
+      settings:
+        id: Obsidian.Obsidian
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Google Chrome
+        securityContext: elevated
+      settings:
+        id: Google.Chrome
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install 7-Zip
+        securityContext: elevated
+      settings:
+        id: 7zip.7zip
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install 1Password
+        securityContext: elevated
+      settings:
+        id: AgileBits.1Password
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Docker Desktop
+        securityContext: elevated
+      settings:
+        id: Docker.DockerDesktop
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Logi Options+
+        securityContext: elevated
+      settings:
+        id: Logitech.OptionsPlus
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Sysinternals Suite
+        securityContext: elevated
+      settings:
+        id: Microsoft.Sysinternals.Suite
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Remote Desktop Connection Manager (RDCMan)
+        securityContext: elevated
+      settings:
+        id: Microsoft.Sysinternals.RDCMan
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Helm
+        securityContext: elevated
+      settings:
+        id: Helm.Helm
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install k9s
+        securityContext: elevated
+      settings:
+        id: Derailed.k9s
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Intelligent Terminal
+        securityContext: elevated
+      settings:
+        id: Microsoft.IntelligentTerminal
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Coreutils
+        securityContext: elevated
+      settings:
+        id: Microsoft.Coreutils
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Flameshot
+        securityContext: elevated
+      settings:
+        id: Flameshot.Flameshot
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Todoist
+        securityContext: elevated
+      settings:
+        id: 9MWF2DWS5Z9N
+        source: msstore
