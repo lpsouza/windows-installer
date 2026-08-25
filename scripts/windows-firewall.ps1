@@ -5,13 +5,15 @@ if (-not ([bool]([Security.Principal.WindowsPrincipal] [Security.Principal.Windo
   throw "This script must be run as Administrator."
 }
 
-Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
+Write-Host "Resetting Windows Firewall to default state..."
+netsh advfirewall reset | Out-Null
 
-try {
-  Get-NetFirewallRule | Remove-NetFirewallRule
-} catch {
-  Write-Warning "Some firewall rules could not be removed: $($_.Exception.Message)"
-}
+Write-Host "Enforcing Default Inbound Block policy across all profiles..."
+Set-NetFirewallProfile -Profile Domain, Public, Private `
+  -Enabled True `
+  -DefaultInboundAction Block `
+  -DefaultOutboundAction Allow `
+  -NotifyOnListen False
 
 function Ensure-FirewallRule {
   param(
@@ -30,31 +32,25 @@ function Ensure-FirewallRule {
   New-NetFirewallRule @RuleDefinition | Out-Null
 }
 
+Write-Host "Applying custom inbound rules..."
+
 Ensure-FirewallRule -DisplayName "[WindowsInstaller] Allow mDNS (UDP-In)" -RuleDefinition @{
   DisplayName = "[WindowsInstaller] Allow mDNS (UDP-In)"
-  Direction = "Inbound"
-  Action = "Allow"
-  Enabled = "True"
-  Protocol = "UDP"
-  LocalPort = 5353
-  Profile = "Private"
+  Direction   = "Inbound"
+  Action      = "Allow"
+  Enabled     = "True"
+  Protocol    = "UDP"
+  LocalPort   = 5353
+  Profile     = "Private"
 }
 
 Ensure-FirewallRule -DisplayName "[WindowsInstaller] Allow Wireless Display (TCP-In)" -RuleDefinition @{
   DisplayName = "[WindowsInstaller] Allow Wireless Display (TCP-In)"
-  Direction = "Inbound"
-  Action = "Allow"
-  Enabled = "True"
-  Program = "$env:SystemRoot\System32\WUDFHost.exe"
-  Profile = "Private"
+  Direction   = "Inbound"
+  Action      = "Allow"
+  Enabled     = "True"
+  Program     = "$env:SystemRoot\System32\WUDFHost.exe"
+  Profile     = "Private"
 }
 
-try {
-  Set-NetFirewallProfile -Profile Domain, Public, Private -NotifyOnListen False
-} catch {
-  Write-Warning "Could not disable firewall block notifications: $($_.Exception.Message)"
-}
-
-Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled True
-
-Write-Host "Firewall rules were reset and required inbound rules were recreated."
+Write-Host "Firewall reset to default state, default inbound block enforced, and custom rules configured."
